@@ -1045,7 +1045,7 @@
         },
 
         move: function() {
-            var parentOffset = { top: -8, left: 18 },
+            var parentOffset = { top: $('.dateRangePickerInput.invalidDate').length ? -29 : -12 , left: 18 },
                 containerTop,
                 drops = this.drops;
 
@@ -1121,8 +1121,7 @@
                         right: 'auto'
                     });
                 }
-            } 
-            else {
+            } else {
                 var containerLeft = this.element.offset().left - parentOffset.left;
                 if (containerLeft + containerWidth > $(window).width()) {
                     this.container.css({
@@ -1274,7 +1273,7 @@
 
         mouseDownDate: function(e) {
             //ignore dates that can't be selected
-            if (!$(e.target).hasClass('date-circle')) return;
+            if (!$(e.target).hasClass('date-circle') || $(e.target).parents('.off.disabled').length) return;
 
             $(e.target).addClass('active')
         },
@@ -1282,7 +1281,7 @@
         hoverDate: function(e) {
 
             //ignore dates that can't be selected
-            if (!$(e.target).hasClass('available') && !$(e.target).hasClass('date-circle')) return;
+            if (!$(e.target).hasClass('available') && !$(e.target).hasClass('date-circle') || $(e.target).parents('.off.disabled').length) return;
 
             var title = '';
             if ($(e.target).hasClass('date-circle')) {
@@ -1334,7 +1333,7 @@
         },
 
         clickDate: function(e) {
-            if (!$(e.target).hasClass('available') && !$(e.target).hasClass('date-circle')) return;
+            if (!$(e.target).hasClass('available') && !$(e.target).hasClass('date-circle') || $(e.target).parents('.off.disabled').length) return;
 
             var title = '';
             if ($(e.target).hasClass('date-circle')) {
@@ -1404,7 +1403,7 @@
                   this.clickApply();
                 }
             }
-            
+
             if (this.singleDatePicker) {
                 this.setEndDate(this.startDate);
                 if (!this.timePicker && this.autoApply)
@@ -1586,7 +1585,6 @@
                 end = start;
             }
 
-
             if (!start.isValid() || !end.isValid()) return;
 
             this.setStartDate(start);
@@ -1629,8 +1627,8 @@
 
     };
 
-    $.fn.daterangepicker = function(options, callback) {
-        var implementOptions = $.extend(true, {}, $.fn.daterangepicker.defaultOptions, options);
+    $.fn.dateRangePicker = function(options, callback) {
+        var implementOptions = $.extend(true, {}, $.fn.dateRangePicker.defaultOptions, options);
         this.each(function() {
             var el = $(this);
             if (el.data('daterangepicker'))
