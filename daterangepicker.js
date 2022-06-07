@@ -30,6 +30,9 @@
         root.daterangepicker = factory(root.moment, root.jQuery);
     }
 }(typeof window !== 'undefined' ? window : this, function(moment, $) {
+    $('#customDateRangePicker').on('change', function() {
+        console.log('customDateRangePicker');
+      });
     var DateRangePicker = function(element, options, cb) {
 
         //default settings for options
@@ -435,6 +438,7 @@
             .on('click.daterangepicker', 'button.cancelBtn', $.proxy(this.clickCancel, this));
 
         if (this.element.is('input') || this.element.is('button')) {
+            console.log('this.element', this.element);
             this.element.on({
                 'click.daterangepicker': $.proxy(this.show, this),
                 'focus.daterangepicker': $.proxy(this.show, this),

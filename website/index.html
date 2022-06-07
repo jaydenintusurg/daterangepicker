@@ -294,6 +294,7 @@
                                   });
 
                                   $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                                      console.log('clicked apply.daterangepicker');
                                       $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
                                   });
 
